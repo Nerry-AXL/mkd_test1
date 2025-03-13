@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="OCR Query Interface for Product Recommendation System">
+    <title>OCR Query Interface</title>
+</head>
+<body>
+    <h1>Upload a Handwritten Query</h1>
+    <form method="post" enctype="multipart/form-data">
+        <label for="image_data">Choose an image file:</label>
+        <input type="file" id="image_data" name="image_data" accept="image/*" required title="Upload an image file" placeholder="Choose an image file">
+        <button type="submit">Upload & Process</button>
+    </form>
+    {% if response %}
+        <h2>{{ response }}</h2>
+        <div>
+            <ul>
+                {% for product in products %}
+                    <li>{{ product.name }} - {{ product.price }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+    {% endif %}
+</body>
+</html>

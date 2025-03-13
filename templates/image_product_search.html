@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Product Image Search Interface for Product Recommendation System">
+    <title>Product Image Search</title>
+</head>
+<body>
+    <h1>Upload a Product Image</h1>
+    <form method="post" enctype="multipart/form-data">
+        <label for="product_image">Upload Product Image:</label>
+        <input type="file" id="product_image" name="product_image" accept="image/*" required title="Choose an image file to upload">
+        <button type="submit">Upload & Identify</button>
+    </form>
+    {% if response %}
+        <h2>{{ response }}</h2>
+        <ul>
+            {% for product in products %}
+                <li>{{ product.name }} - {{ product.price }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+</body>
+</html>
