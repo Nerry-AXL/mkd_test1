@@ -5,23 +5,88 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="OCR Query Interface for Product Recommendation System">
     <title>OCR Query Interface</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            width: 80%;
+            margin: 20px auto;
+            background: #fff;
+            padding: 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        input[type="file"] {
+            width: 70%;
+            padding: 8px;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            background: #fff;
+        }
+        button {
+            padding: 8px 15px;
+            background: #28a745;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+        button:hover {
+            background: #218838;
+        }
+    </style>
 </head>
 <body>
-    <h1>Upload a Handwritten Query</h1>
-    <form method="post" enctype="multipart/form-data">
-        <label for="image_data">Choose an image file:</label>
-        <input type="file" id="image_data" name="image_data" accept="image/*" required title="Upload an image file" placeholder="Choose an image file">
-        <button type="submit">Upload & Process</button>
-    </form>
-    {% if response %}
-        <h2>{{ response }}</h2>
-        <div>
-            <ul>
-                {% for product in products %}
-                    <li>{{ product.name }} - {{ product.price }}</li>
-                {% endfor %}
-            </ul>
-        </div>
-    {% endif %}
+    <div class="container">
+        <h1>Upload a Handwritten Query</h1>
+        <form method="post" enctype="multipart/form-data">
+            <input type="file" id="image_data" name="image_data" accept="image/*" required title="Upload an image file">
+            <button type="submit">Upload & Process</button>
+        </form>
+
+        {% if response %}
+            <h1>Extracted Query Text</h1>
+            <p>{{ response }}</p>
+
+            <h1>Matching Products</h1>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Stock Code</th>
+                        <th>Description</th>
+                        <th>Unit Price</th>
+                        <th>Country</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for product in products %}
+                        <tr>
+                            <td>{{ product.StockCode }}</td>
+                            <td>{{ product.Description }}</td>
+                            <td>{{ product.UnitPrice }}</td>
+                            <td>{{ product.Country }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% endif %}
+    </div>
 </body>
 </html>
