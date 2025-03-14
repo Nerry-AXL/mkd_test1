@@ -5,21 +5,87 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Text Query Interface for Product Recommendation System">
     <title>Text Query Interface</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            width: 80%;
+            margin: 20px auto;
+            background: #fff;
+            padding: 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        input[type="text"] {
+            width: 70%;
+            padding: 8px;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        button {
+            padding: 8px 15px;
+            background: #28a745;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+        button:hover {
+            background: #218838;
+        }
+    </style>
 </head>
 <body>
-    <h1>Enter Your Query</h1>
-    <form method="post">
-        <input type="text" name="query" placeholder="Type your product query here" required>
-        <button type="submit">Search</button>
-    </form>
-    {% if response %}
-        <h2>{{ response }}</h2>
-        <ul>
-            {% for product in products %}
-                <li>{{ product.name }} - {{ product.price }}</li>
-            {% endfor %}
-        </ul>
-    {% endif %}
+    <div class="container">
+        <h1>Enter Your Query</h1>
+        <form method="post">
+            <input type="text" name="query" placeholder="Type your product query here" required>
+            <button type="submit">Search</button>
+        </form>
+
+        {% if response %}
+            <h1>Answer In Natural Language</h1>
+            <p>{{ response }}</p>
+            
+            <h1>Selected Products</h1>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Stock Code</th>
+                        <th>Description</th>
+                        <th>Unit Price</th>
+                        <th>Country</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for product in products %}
+                        <tr>
+                            <td>{{ product.StockCode }}</td>
+                            <td>{{ product.Description }}</td>
+                            <td>{{ product.UnitPrice }}</td>
+                            <td>{{ product.Country }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% endif %}
+    </div>
 </body>
 </html>
-
